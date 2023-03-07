@@ -1,0 +1,22 @@
+## Local
+
+server:
+  port: 9898
+
+# Auto Reload
+spring:
+  devtools:
+    restart:
+      enabled: true
+
+  thymeleaf:
+    cache: false
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      database: devjun
+      username: devjun
+      password: devjun
