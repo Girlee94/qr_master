@@ -7,4 +7,6 @@ public class MongoDbTestRequestDto {
 
     private String userid;
 
+    private String author;
+
 }

@@ -3,6 +3,7 @@ package com.qrmaster.api.controller;
 import com.qrmaster.api.dto.MongoDbTestRequestDto;
 import com.qrmaster.api.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,5 +32,6 @@ public class LoginController {
 
         return ResponseEntity.status(901).body(testName);
     }
+
 
 }

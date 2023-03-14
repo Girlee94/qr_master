@@ -1,6 +1,6 @@
 package com.qrmaster.api.repository;
 
-import com.qrmaster.api.MongoDbTestModel;
+import com.qrmaster.api.model.MongoDbTestModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

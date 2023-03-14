@@ -1,4 +1,4 @@
-package com.qrmaster.api;
+package com.qrmaster.api.model;
 
 import lombok.Getter;
 import lombok.Setter;

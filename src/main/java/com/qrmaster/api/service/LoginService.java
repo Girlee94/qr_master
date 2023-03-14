@@ -4,6 +4,7 @@ import com.qrmaster.api.controller.LoginController;
 import com.qrmaster.api.dto.MongoDbTestRequestDto;
 import com.qrmaster.api.repository.MongoDbTestRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
 
-    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     private final MongoDbTestRepository mongoDbTestRepository;
 
