@@ -11,3 +11,8 @@ spring:
       enabled: true
   thymeleaf:
     cache: false
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: test
