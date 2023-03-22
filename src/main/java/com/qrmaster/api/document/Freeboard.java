@@ -17,12 +17,13 @@ import java.time.LocalDateTime;
 public class Freeboard {
 	
 	@Id
-	String	_id;
+	String			_id;
 	
-	long	usridx;
-	String	title;
-	String	content;
+	long			usridx;
+	String			title;
+	String			content;
 	LocalDateTime	registerdate;
+	LocalDateTime	updatedate;
 	
 	public static Freeboard writeFreeboard(long usridx, String title, String content) {
 		return Freeboard.builder()
@@ -31,5 +32,11 @@ public class Freeboard {
 						.content(content)
 						.registerdate(LocalDateTime.now())
 						.build();
+	}
+	
+	public void updateFreeboard(String title, String content) {
+		this.title		=	title;
+		this.content	=	content;
+		this.updatedate	=	LocalDateTime.now();
 	}
 }

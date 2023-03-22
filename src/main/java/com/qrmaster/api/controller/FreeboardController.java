@@ -21,7 +21,6 @@ public class FreeboardController {
 	 * author : 현경
 	 * description : 게시판 작성
 	 * parameter : usridx, title, content
-	 *
 	 */
 	@PostMapping("/write")
 	public HashMap<String, Object> writeFreeboard(@RequestBody HashMap<String, Object> pkRequest) {
@@ -36,11 +35,11 @@ public class FreeboardController {
 				throw new RuntimeException("no parameter");
 			}
 			
-			long	nUsridx		=	Long.parseLong(pkRequest.get("usridx").toString());
+			long	nUsrIdx		=	Long.parseLong(pkRequest.get("usridx").toString());
 			String	strTitle	=	pkRequest.get("title").toString();
 			String	strContent	=	pkRequest.get("content").toString();
 			
-			pkResponse	=	mpkFreeboardService.writeFreeboard(nUsridx, strTitle, strContent);
+			pkResponse	=	mpkFreeboardService.writeFreeboard(nUsrIdx, strTitle, strContent);
 		}
 		catch (RuntimeException ex) {
 			
@@ -51,4 +50,54 @@ public class FreeboardController {
 		
 		return pkResponse;
 	}
+	
+	/**
+	 * author : 현경
+	 * description : 게시판 수정
+	 * parameter : freeboardidx, usridx, title, content
+	 */
+	@PostMapping("/update")
+	public HashMap<String, Object> updateFreeboard(@RequestBody HashMap<String, Object> pkRequest) {
+		
+		HashMap<String, Object>	pkResponse	=	new HashMap<>();
+		
+		try {
+			if ((!pkRequest.containsKey("freeboardidx")	|| !StringUtils.hasText(String.valueOf(pkRequest.get("freeboardidx")))) ||
+				(!pkRequest.containsKey("usridx") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("usridx")))) ||
+				(!pkRequest.containsKey("title") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("title")))) ||
+				(!pkRequest.containsKey("content") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("content")))))
+			{
+				throw new RuntimeException("no parameter");
+			}
+			
+			String	strFreeBoardIdx	=	pkRequest.get("freeboardidx").toString();
+			long	nUsrIdx			=	Long.parseLong(pkRequest.get("usridx").toString());
+			String	strTitle		=	pkRequest.get("title").toString();
+			String	strContent		=	pkRequest.get("content").toString();
+			
+			pkResponse	=	mpkFreeboardService.updateFreeboard(strFreeBoardIdx, nUsrIdx, strTitle, strContent);
+		}
+		catch (RuntimeException ex){
+			
+			pkResponse.put("result", "failed");
+			pkResponse.put("errtype", "runtime exception");
+			pkResponse.put("errmsg", ex.getMessage());
+		}
+		
+		return pkResponse;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
