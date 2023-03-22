@@ -1,5 +1,6 @@
 package com.qrmaster.api.document;
 
+import com.qrmaster.api.enums.DeleteFlag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Freeboard {
 	long			usridx;
 	String			title;
 	String			content;
+	DeleteFlag		deleteFlag;
 	LocalDateTime	registerdate;
 	LocalDateTime	updatedate;
 	
@@ -30,6 +32,7 @@ public class Freeboard {
 						.usridx(usridx)
 						.title(title)
 						.content(content)
+						.deleteFlag(DeleteFlag.POST)
 						.registerdate(LocalDateTime.now())
 						.build();
 	}
