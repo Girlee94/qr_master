@@ -17,6 +17,12 @@ public class FreeboardController {
 	
 	private final FreeboardService	mpkFreeboardService;
 	
+	/**
+	 * author : 현경
+	 * description : 게시판 작성
+	 * parameter : usridx, title, content
+	 *
+	 */
 	@PostMapping("/write")
 	public HashMap<String, Object> writeFreeboard(@RequestBody HashMap<String, Object> pkRequest) {
 		
