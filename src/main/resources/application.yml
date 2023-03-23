@@ -19,3 +19,9 @@ spring:
       database: kyeong
 #      username: devjun
 #      password: devjun
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://106.249.248.243:32306/exapparatus?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: "@12321"

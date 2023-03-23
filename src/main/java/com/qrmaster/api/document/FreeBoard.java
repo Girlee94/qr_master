@@ -1,6 +1,7 @@
 package com.qrmaster.api.document;
 
 import com.qrmaster.api.enums.DeleteFlag;
+import com.qrmaster.api.enums.converter.DeleteFlagConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Convert;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "freeboard")
-public class Freeboard {
+public class FreeBoard {
 	
 	@Id
 	String			_id;
@@ -23,12 +25,13 @@ public class Freeboard {
 	long			usridx;
 	String			title;
 	String			content;
+	@Convert(converter = DeleteFlagConverter.class)
 	DeleteFlag		deleteFlag;
 	LocalDateTime	registerdate;
 	LocalDateTime	updatedate;
 	
-	public static Freeboard writeFreeboard(long usridx, String title, String content) {
-		return Freeboard.builder()
+	public static FreeBoard writeFreeboard(long usridx, String title, String content) {
+		return FreeBoard.builder()
 						.usridx(usridx)
 						.title(title)
 						.content(content)
