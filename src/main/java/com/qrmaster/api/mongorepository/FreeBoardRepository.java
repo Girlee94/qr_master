@@ -15,4 +15,6 @@ public interface FreeBoardRepository extends MongoRepository<FreeBoard, String> 
 	Optional<FreeBoard>	findBy_idAndUsridx(String _id, long usrIdx);
 	
 	Page<FreeBoard> findAllByDeleteFlag(DeleteFlag deleteFlag, Pageable pageable);
+	
+	Optional<FreeBoard>	findBy_idAndDeleteFlag(String _id, DeleteFlag deleteFlag);
 }

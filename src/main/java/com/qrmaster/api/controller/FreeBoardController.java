@@ -19,7 +19,7 @@ public class FreeBoardController {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 리스트
+	 * description : 게시글 리스트
 	 * parameter : page
 	 */
 	@PostMapping("/getlist")
@@ -49,7 +49,7 @@ public class FreeBoardController {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 작성
+	 * description : 게시글 작성
 	 * parameter : usridx, title, content
 	 */
 	@PostMapping("/write")
@@ -83,7 +83,37 @@ public class FreeBoardController {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 수정
+	 * description : 게시글 읽기
+	 * parameter : _id
+	 */
+	@PostMapping("/read")
+	public HashMap<String, Object> readFreeBoard(@RequestBody HashMap<String, Object> pkRequest) {
+		
+		HashMap<String, Object>	pkResponse	=	new HashMap<>();
+		
+		try {
+			if ((!pkRequest.containsKey("_id")	|| !StringUtils.hasText(String.valueOf(pkRequest.get("_id")))))
+			{
+				throw new RuntimeException("no parameter");
+			}
+			
+			String	strFreeBoardIdx	=	pkRequest.get("_id").toString();
+			
+			pkResponse	=	mpkFreeBoardService.readFreeBoard(strFreeBoardIdx);
+		}
+		catch (RuntimeException ex)
+		{
+			pkResponse.put("result", "failed");
+			pkResponse.put("errtype", "runtime exception");
+			pkResponse.put("errmsg", ex.getMessage());
+		}
+		
+		return pkResponse;
+	}
+	
+	/**
+	 * author : 현경
+	 * description : 게시글 수정
 	 * parameter : freeboardidx, usridx, title, content
 	 */
 	@PostMapping("/update")
@@ -92,15 +122,15 @@ public class FreeBoardController {
 		HashMap<String, Object>	pkResponse	=	new HashMap<>();
 		
 		try {
-			if ((!pkRequest.containsKey("freeboardidx")	|| !StringUtils.hasText(String.valueOf(pkRequest.get("freeboardidx")))) ||
-				(!pkRequest.containsKey("usridx") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("usridx")))) ||
-				(!pkRequest.containsKey("title") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("title")))) ||
-				(!pkRequest.containsKey("content") 		|| !StringUtils.hasText(String.valueOf(pkRequest.get("content")))))
+			if ((!pkRequest.containsKey("_id")		|| !StringUtils.hasText(String.valueOf(pkRequest.get("_id")))) ||
+				(!pkRequest.containsKey("usridx") 	|| !StringUtils.hasText(String.valueOf(pkRequest.get("usridx")))) ||
+				(!pkRequest.containsKey("title") 	|| !StringUtils.hasText(String.valueOf(pkRequest.get("title")))) ||
+				(!pkRequest.containsKey("content") 	|| !StringUtils.hasText(String.valueOf(pkRequest.get("content")))))
 			{
 				throw new RuntimeException("no parameter");
 			}
 			
-			String	strFreeBoardIdx	=	pkRequest.get("freeboardidx").toString();
+			String	strFreeBoardIdx	=	pkRequest.get("_id").toString();
 			long	nUsrIdx			=	Long.parseLong(pkRequest.get("usridx").toString());
 			String	strTitle		=	pkRequest.get("title").toString();
 			String	strContent		=	pkRequest.get("content").toString();

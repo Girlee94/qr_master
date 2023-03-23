@@ -30,7 +30,7 @@ public class FreeBoard {
 	LocalDateTime	registerdate;
 	LocalDateTime	updatedate;
 	
-	public static FreeBoard writeFreeboard(long usridx, String title, String content) {
+	public static FreeBoard writeFreeBoard(long usridx, String title, String content) {
 		return FreeBoard.builder()
 						.usridx(usridx)
 						.title(title)
@@ -40,7 +40,7 @@ public class FreeBoard {
 						.build();
 	}
 	
-	public void updateFreeboard(String title, String content) {
+	public void updateFreeBoard(String title, String content) {
 		this.title		=	title;
 		this.content	=	content;
 		this.updatedate	=	LocalDateTime.now();

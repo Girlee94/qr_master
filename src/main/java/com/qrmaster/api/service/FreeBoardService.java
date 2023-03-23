@@ -20,7 +20,7 @@ public class FreeBoardService {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 리스트
+	 * description : 게시글 리스트
 	 * parameter : page
 	 */
 	public HashMap<String, Object> getFreeBoardList(int page) {
@@ -51,7 +51,7 @@ public class FreeBoardService {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 작성
+	 * description : 게시글 작성
 	 * parameter : usridx, title, content
 	 */
 	public HashMap<String, Object> writeFreeBoard(long usrIdx, String title, String content) {
@@ -59,11 +59,11 @@ public class FreeBoardService {
 		HashMap<String, Object>	pkResponse	=	new HashMap<>();
 		
 		try {
-			FreeBoard pkSaveData	=	mpkFreeBoardRep.save(FreeBoard.writeFreeboard(usrIdx, title, content));
+			FreeBoard pkSaveData	=	mpkFreeBoardRep.save(FreeBoard.writeFreeBoard(usrIdx, title, content));
 			
 			pkResponse.put("result", "success");
 			pkResponse.put("errtype", "no error");
-			pkResponse.put("freeboardidx", pkSaveData.get_id());
+			pkResponse.put("_id", pkSaveData.get_id());
 		}
 		catch (RuntimeException ex) {
 			
@@ -77,7 +77,34 @@ public class FreeBoardService {
 	
 	/**
 	 * author : 현경
-	 * description : 게시판 수정
+	 * description : 게시글 읽기
+	 * parameter : _id
+	 */
+	public HashMap<String, Object> readFreeBoard(String freeBoardIdx) {
+		
+		HashMap<String, Object>	pkResponse	=	new HashMap<>();
+		
+		try {
+			FreeBoard	pkFreeBoard	=	mpkFreeBoardRep.findBy_idAndDeleteFlag(freeBoardIdx, DeleteFlag.POST)
+													.orElseThrow(NullPointerException::new);
+			
+			pkResponse.put("result", "success");
+			pkResponse.put("errtype", "no error");
+			pkResponse.put("freeboard", pkFreeBoard);
+		}
+		catch (RuntimeException ex)
+		{
+			pkResponse.put("result", "failed");
+			pkResponse.put("errtype", "runtime exception");
+			pkResponse.put("errmsg", ex.getMessage());
+		}
+		
+		return pkResponse;
+	}
+	
+	/**
+	 * author : 현경
+	 * description : 게시글 수정
 	 * parameter : freeboardidx, usridx, title, content
 	 */
 	public HashMap<String, Object> updateFreeBoard(String freeBoardIdx, long usrIdx, String title, String content) {
@@ -89,7 +116,7 @@ public class FreeBoardService {
 			FreeBoard pkCheckAuth	=	mpkFreeBoardRep.findBy_idAndUsridx(freeBoardIdx, usrIdx)
 														.orElseThrow(() -> new NullPointerException("no freeboard"));
 			
-			pkCheckAuth.updateFreeboard(title, content);
+			pkCheckAuth.updateFreeBoard(title, content);
 			mpkFreeBoardRep.save(pkCheckAuth);
 			
 			pkResponse.put("result", "success");
