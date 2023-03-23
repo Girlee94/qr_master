@@ -3,6 +3,7 @@ package com.qrmaster.api.service;
 import com.qrmaster.api.document.FreeBoard;
 import com.qrmaster.api.enums.DeleteFlag;
 import com.qrmaster.api.mongorepository.FreeBoardRepository;
+import com.qrmaster.api.utils.EBUtilLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +43,8 @@ public class FreeBoardService {
 		}
 		catch (RuntimeException ex)
 		{
+			EBUtilLogger.getLooger().error(ex.getMessage());
+			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
@@ -65,7 +69,9 @@ public class FreeBoardService {
 			pkResponse.put("errtype", "no error");
 			pkResponse.put("_id", pkSaveData.get_id());
 		}
-		catch (RuntimeException ex) {
+		catch (RuntimeException ex)
+		{
+			EBUtilLogger.getLooger().error(ex.getMessage());
 			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
@@ -94,6 +100,8 @@ public class FreeBoardService {
 		}
 		catch (RuntimeException ex)
 		{
+			EBUtilLogger.getLooger().error(ex.getMessage());
+			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
@@ -124,6 +132,8 @@ public class FreeBoardService {
 		}
 		catch (RuntimeException ex)
 		{
+			EBUtilLogger.getLooger().error(ex.getMessage());
+			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
