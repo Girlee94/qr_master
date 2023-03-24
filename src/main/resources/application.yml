@@ -25,3 +25,10 @@ spring:
     url: jdbc:mariadb://106.249.248.243:32306/exapparatus?useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: "@12321"
+
+logging:
+  level:
+    org.springframework.web : debug
+    sql : error
+    jdbc : off
+    jdbc.sqlonly : debug

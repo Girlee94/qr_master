@@ -40,7 +40,7 @@ public class FreeBoardController {
 		}
 		catch (RuntimeException ex)
 		{
-			EBUtilLogger.getLooger().error(ex.getMessage());
+//			EBUtilLogger.getLooger().error(ex.getMessage());
 			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
