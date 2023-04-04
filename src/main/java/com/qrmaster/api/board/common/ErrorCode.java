@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
 @JsonFormat(shape = Shape.OBJECT)
 public enum ErrorCode{
 
-      // COMMON
-      SUCCESS_CODE(200, "C001", "")
-    , INVALID_PARAMETER(400, "C001", "invalid parameter")
-    , PERMISSION_FORBIDDEN(403, "C002", "forbidden error")
+    // COMMON
+    SUCCESS_CODE(200, "C001", "no error"),
+    INVALID_PARAMETER(400, "C001", "invalid parameter"),
+    PERMISSION_FORBIDDEN(403, "C002", "forbidden error")
     ;
 
     private int status;

@@ -3,41 +3,48 @@ package com.qrmaster.api.board.controller;
 import com.qrmaster.api.board.common.ErrorCode;
 import com.qrmaster.api.board.common.JsonResult;
 import com.qrmaster.api.board.dto.BoardDto;
-import com.qrmaster.api.board.repository.Board;
+import com.qrmaster.api.board.dto.board.BoardPageResponseDTO;
+import com.qrmaster.api.board.entity.mongo.Board;
 import com.qrmaster.api.board.service.BoardService;
 import com.qrmaster.api.board.validation.BoardValidation;
+import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("board/api")
+@RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardRestController {
 
-    @Autowired
-    private BoardService boardService;
+    private final BoardService      boardService;
+    private final BoardValidation   boardValidation;
+    private final JsonResult        result;
 
-    @Autowired
-    private BoardValidation boardValidation;
+    @GetMapping
+    public ResponseEntity<BoardPageResponseDTO> getBoardList(@RequestParam(required = true) int page) {
 
-    @Autowired
-    private JsonResult result;
+        BoardPageResponseDTO    response    =   boardService.getBoardList(page);
 
-    @GetMapping("list")
+        return ResponseEntity.ok()
+                .body(response);
+    }
+    /*
+    @GetMapping("/list")
     public List<Board> getBoardList(){
         return boardService.getBoardList();
     }
+     */
 
-    @GetMapping("data")
+    @GetMapping("/data")
     public Board getBoard(String id){
         return boardService.getBoard(id);
     }
 
-    @PostMapping("write")
+    @PostMapping("/write")
     public JSONObject insertBoard(
               @RequestBody BoardDto boardDto
             , BindingResult bindingResult
@@ -47,7 +54,7 @@ public class BoardRestController {
             if(bindingResult.hasErrors()) throw new Exception();
 
             Board board = makeBoardEntity(boardDto);
-            board.setReg_date(new Date());
+            board.setRegister_date(LocalDateTime.now());
             boardService.insertBoard(board);
             
             return result.getData(ErrorCode.SUCCESS_CODE, "게시글이 등록되었습니다.");
@@ -59,7 +66,7 @@ public class BoardRestController {
 
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     public JSONObject updateBoard(
               @RequestBody BoardDto boardDto
             , BindingResult bindingResult
@@ -70,7 +77,7 @@ public class BoardRestController {
             if(bindingResult.hasErrors()) throw new Exception();
 
             Board board = makeBoardEntity(boardDto);
-            board.setId(boardDto.getId());
+            board.set_id(boardDto.getId());
             boardService.updateBoard(board);
 
             return result.getData(ErrorCode.SUCCESS_CODE, "업데이트가 완료되었습니다.");
@@ -81,7 +88,7 @@ public class BoardRestController {
         }
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public JSONObject deleteBoard(@RequestBody BoardDto boardDto){
         try {
             boardService.deleteBoard(boardDto.getId());
@@ -96,8 +103,7 @@ public class BoardRestController {
     private Board makeBoardEntity(BoardDto boardDto){
         Board board = new Board();
         board.setTitle(boardDto.getTitle());
-        board.setContents(boardDto.getContents());
-        board.setWriter(boardDto.getWriter());
+        board.setContent(boardDto.getContents());
         return board;
     }
 }

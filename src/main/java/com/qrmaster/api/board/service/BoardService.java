@@ -1,43 +1,60 @@
 package com.qrmaster.api.board.service;
 
-import com.qrmaster.api.board.repository.Board;
-import com.qrmaster.api.board.repository.BoardRepository;
-import lombok.AllArgsConstructor;
+import com.qrmaster.api.board.dto.board.BoardPageResponseDTO;
+import com.qrmaster.api.board.dto.board.GetBoardListDTO;
+import com.qrmaster.api.board.entity.mongo.Board;
+import com.qrmaster.api.board.enums.DeleteFlag;
+import com.qrmaster.api.board.repository.mongo.BoardRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BoardService {
 
-    private final BoardRepository boardRepository;
+    private final BoardRepository boardRep;
 
-    public List<Board> getBoardList(){
-        return boardRepository.findAll();
+    public BoardPageResponseDTO getBoardList(int page) {
+
+        BoardPageResponseDTO    response =   new BoardPageResponseDTO();
+
+        Page<Board> boardList   =   boardRep.getBoardList(DeleteFlag.POST, PageRequest.of(page - 1, 10));
+        Page<GetBoardListDTO>   boardListDTOS   =   new GetBoardListDTO().toDtoList(boardList);
+
+        response.setPage(boardListDTOS);
+
+        return response;
     }
+    /*
+    public List<Board> getBoardList(){
+        return boardRep.findAll();
+    }
+     */
 
     public Board getBoard(String id){
-        return boardRepository.findById(id).orElseGet(Board::new);
+        return boardRep.findById(id).orElseGet(Board::new);
     }
 
     public boolean isBoardExist(String id) throws Exception {
-        Board board = boardRepository.findById(id).orElseThrow(Exception::new);
+        Board board = boardRep.findById(id).orElseThrow(Exception::new);
         return board != null;
     }
 
     public void insertBoard(Board board){
-        boardRepository.save(board);
+        boardRep.save(board);
     }
 
     public void updateBoard(Board board){
-        board.setMod_date(new Date());
-        boardRepository.save(board);
+        board.setUpdate_date(LocalDateTime.now());
+        boardRep.save(board);
     }
 
     public void deleteBoard(String id) throws Exception {
-        if (isBoardExist(id)) boardRepository.deleteById(id);
+        if (isBoardExist(id)) boardRep.deleteById(id);
     }
+
 }

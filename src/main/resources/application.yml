@@ -15,4 +15,10 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: test
+      database: kyeong
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/test?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: "aabb1595"

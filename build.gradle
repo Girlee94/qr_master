@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.qrmaster'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 configurations {
     compileOnly {
@@ -28,6 +28,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 //    implementation('org.slf4j:jcl-over-slf4j:1.5.6')
 //    implementation('ch.qos.logback:logback-classic:1.4.5')
