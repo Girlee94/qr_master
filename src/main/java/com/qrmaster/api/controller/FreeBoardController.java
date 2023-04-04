@@ -1,7 +1,6 @@
 package com.qrmaster.api.controller;
 
 import com.qrmaster.api.service.FreeBoardService;
-import com.qrmaster.api.utils.EBUtilLogger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 @RequestMapping("/freeboard")
 public class FreeBoardController {
-	
+
 	private final FreeBoardService	mpkFreeBoardService;
 	
 	/**
@@ -40,8 +39,6 @@ public class FreeBoardController {
 		}
 		catch (RuntimeException ex)
 		{
-//			EBUtilLogger.getLooger().error(ex.getMessage());
-			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
@@ -76,8 +73,6 @@ public class FreeBoardController {
 		}
 		catch (RuntimeException ex)
 		{
-			EBUtilLogger.getLooger().error(ex.getMessage());
-			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
@@ -108,8 +103,6 @@ public class FreeBoardController {
 		}
 		catch (RuntimeException ex)
 		{
-			EBUtilLogger.getLooger().error(ex.getMessage());
-			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
@@ -146,8 +139,6 @@ public class FreeBoardController {
 		}
 		catch (RuntimeException ex)
 		{
-			EBUtilLogger.getLooger().error(ex.getMessage());
-			
 			pkResponse.put("result", "failed");
 			pkResponse.put("errtype", "runtime exception");
 			pkResponse.put("errmsg", ex.getMessage());
