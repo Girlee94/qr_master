@@ -1,4 +1,4 @@
-package com.qrmaster.api.board.common;
+package com.qrmaster.api.common;
 
 import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Service;

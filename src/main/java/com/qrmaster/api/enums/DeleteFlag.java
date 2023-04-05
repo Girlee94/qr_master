@@ -1,4 +1,4 @@
-package com.qrmaster.api.board.enums;
+package com.qrmaster.api.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.qrmaster.api.board.enums.converter;
+package com.qrmaster.api.enums.converter;
 
-import com.qrmaster.api.board.enums.DeleteFlag;
+import com.qrmaster.api.enums.DeleteFlag;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

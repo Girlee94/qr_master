@@ -1,10 +1,10 @@
-package com.qrmaster.api.board.service;
+package com.qrmaster.api.service;
 
-import com.qrmaster.api.board.dto.board.BoardPageResponseDTO;
-import com.qrmaster.api.board.dto.board.GetBoardListDTO;
-import com.qrmaster.api.board.entity.mongo.Board;
-import com.qrmaster.api.board.enums.DeleteFlag;
-import com.qrmaster.api.board.repository.mongo.BoardRepository;
+import com.qrmaster.api.dto.board.BoardPageResponseDTO;
+import com.qrmaster.api.dto.board.GetBoardListDTO;
+import com.qrmaster.api.entity.mongo.Board;
+import com.qrmaster.api.enums.DeleteFlag;
+import com.qrmaster.api.repository.mongo.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class BoardService {
 
-    private final BoardRepository boardRep;
+    private final BoardRepository   boardRep;
 
     public BoardPageResponseDTO getBoardList(int page) {
 
-        BoardPageResponseDTO    response =   new BoardPageResponseDTO();
+        BoardPageResponseDTO    response    =   new BoardPageResponseDTO();
 
         Page<Board> boardList   =   boardRep.getBoardList(DeleteFlag.POST, PageRequest.of(page - 1, 10));
         Page<GetBoardListDTO>   boardListDTOS   =   new GetBoardListDTO().toDtoList(boardList);
@@ -29,6 +29,7 @@ public class BoardService {
 
         return response;
     }
+
     /*
     public List<Board> getBoardList(){
         return boardRep.findAll();

@@ -1,4 +1,4 @@
-package com.qrmaster.api.board.dto;
+package com.qrmaster.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

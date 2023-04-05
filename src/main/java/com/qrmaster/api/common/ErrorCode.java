@@ -1,4 +1,4 @@
-package com.qrmaster.api.board.common;
+package com.qrmaster.api.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;

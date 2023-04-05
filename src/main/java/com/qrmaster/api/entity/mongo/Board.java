@@ -1,7 +1,7 @@
-package com.qrmaster.api.board.entity.mongo;
+package com.qrmaster.api.entity.mongo;
 
-import com.qrmaster.api.board.enums.DeleteFlag;
-import com.qrmaster.api.board.enums.converter.DeleteFlagConverter;
+import com.qrmaster.api.enums.DeleteFlag;
+import com.qrmaster.api.enums.converter.DeleteFlagConverter;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

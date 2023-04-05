@@ -1,7 +1,7 @@
-package com.qrmaster.api.board.repository.mongo;
+package com.qrmaster.api.repository.mongo;
 
-import com.qrmaster.api.board.entity.mongo.Board;
-import com.qrmaster.api.board.enums.DeleteFlag;
+import com.qrmaster.api.entity.mongo.Board;
+import com.qrmaster.api.enums.DeleteFlag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

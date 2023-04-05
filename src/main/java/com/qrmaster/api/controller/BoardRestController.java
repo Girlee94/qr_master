@@ -1,12 +1,12 @@
-package com.qrmaster.api.board.controller;
+package com.qrmaster.api.controller;
 
-import com.qrmaster.api.board.common.ErrorCode;
-import com.qrmaster.api.board.common.JsonResult;
-import com.qrmaster.api.board.dto.BoardDto;
-import com.qrmaster.api.board.dto.board.BoardPageResponseDTO;
-import com.qrmaster.api.board.entity.mongo.Board;
-import com.qrmaster.api.board.service.BoardService;
-import com.qrmaster.api.board.validation.BoardValidation;
+import com.qrmaster.api.common.ErrorCode;
+import com.qrmaster.api.common.JsonResult;
+import com.qrmaster.api.dto.BoardDto;
+import com.qrmaster.api.dto.board.BoardPageResponseDTO;
+import com.qrmaster.api.entity.mongo.Board;
+import com.qrmaster.api.service.BoardService;
+import com.qrmaster.api.validation.BoardValidation;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +20,19 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class BoardRestController {
 
-    private final BoardService      boardService;
-    private final BoardValidation   boardValidation;
-    private final JsonResult        result;
+    private final BoardService		boardService;
+    private final BoardValidation	boardValidation;
+    private final JsonResult		result;
 
     @GetMapping
     public ResponseEntity<BoardPageResponseDTO> getBoardList(@RequestParam(required = true) int page) {
 
-        BoardPageResponseDTO    response    =   boardService.getBoardList(page);
+        BoardPageResponseDTO	response	=	boardService.getBoardList(page);
 
         return ResponseEntity.ok()
                 .body(response);
     }
+
     /*
     @GetMapping("/list")
     public List<Board> getBoardList(){
