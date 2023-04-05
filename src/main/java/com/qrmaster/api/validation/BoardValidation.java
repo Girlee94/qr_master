@@ -1,6 +1,6 @@
 package com.qrmaster.api.validation;
 
-import com.qrmaster.api.dto.BoardDto;
+import com.qrmaster.api.dto.board.BoardDto;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

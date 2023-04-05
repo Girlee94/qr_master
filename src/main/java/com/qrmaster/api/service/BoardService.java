@@ -1,7 +1,7 @@
 package com.qrmaster.api.service;
 
-import com.qrmaster.api.dto.board.BoardPageResponseDTO;
-import com.qrmaster.api.dto.board.GetBoardListDTO;
+import com.qrmaster.api.dto.board.response.BoardPageResponseDTO;
+import com.qrmaster.api.dto.board.response.GetBoardListDTO;
 import com.qrmaster.api.entity.mongo.Board;
 import com.qrmaster.api.enums.DeleteFlag;
 import com.qrmaster.api.repository.mongo.BoardRepository;

@@ -2,8 +2,8 @@ package com.qrmaster.api.controller;
 
 import com.qrmaster.api.common.ErrorCode;
 import com.qrmaster.api.common.JsonResult;
-import com.qrmaster.api.dto.BoardDto;
-import com.qrmaster.api.dto.board.BoardPageResponseDTO;
+import com.qrmaster.api.dto.board.BoardDto;
+import com.qrmaster.api.dto.board.response.BoardPageResponseDTO;
 import com.qrmaster.api.entity.mongo.Board;
 import com.qrmaster.api.service.BoardService;
 import com.qrmaster.api.validation.BoardValidation;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
-public class BoardRestController {
+public class BoardController {
 
     private final BoardService		boardService;
     private final BoardValidation	boardValidation;

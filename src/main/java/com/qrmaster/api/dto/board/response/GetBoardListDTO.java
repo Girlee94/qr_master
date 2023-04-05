@@ -1,4 +1,4 @@
-package com.qrmaster.api.dto.board;
+package com.qrmaster.api.dto.board.response;
 
 import com.qrmaster.api.entity.mongo.Board;
 import com.qrmaster.api.enums.DeleteFlag;

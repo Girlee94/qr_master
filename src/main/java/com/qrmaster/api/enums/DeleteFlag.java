@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 @Getter
 @AllArgsConstructor
 public enum DeleteFlag {
+
     VALID((byte)1),
     INVALID((byte)0);
 

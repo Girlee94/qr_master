@@ -1,4 +1,4 @@
-package com.qrmaster.api.dto.board;
+package com.qrmaster.api.dto.board.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
