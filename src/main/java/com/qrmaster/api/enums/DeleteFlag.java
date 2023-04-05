@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
 @Getter
 @AllArgsConstructor
 public enum DeleteFlag {
-    POST((byte)1),
-    DELETE((byte)0);
+    VALID((byte)1),
+    INVALID((byte)0);
 
     private final byte	deleteFlag;
 

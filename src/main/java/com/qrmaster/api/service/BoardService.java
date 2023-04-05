@@ -22,7 +22,7 @@ public class BoardService {
 
         BoardPageResponseDTO    response    =   new BoardPageResponseDTO();
 
-        Page<Board> boardList   =   boardRep.getBoardList(DeleteFlag.POST, PageRequest.of(page - 1, 10));
+        Page<Board> boardList   =   boardRep.getBoardList(DeleteFlag.VALID, PageRequest.of(page - 1, 10));
         Page<GetBoardListDTO>   boardListDTOS   =   new GetBoardListDTO().toDtoList(boardList);
 
         response.setPage(boardListDTOS);
