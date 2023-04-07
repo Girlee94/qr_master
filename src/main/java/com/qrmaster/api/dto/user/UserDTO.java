@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-public class UserDto {
+public class UserDTO {
 
 	@Data
 	@NoArgsConstructor

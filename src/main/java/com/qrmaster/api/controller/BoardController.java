@@ -2,7 +2,7 @@ package com.qrmaster.api.controller;
 
 import com.qrmaster.api.common.ErrorCode;
 import com.qrmaster.api.common.JsonResult;
-import com.qrmaster.api.dto.board.BoardDto;
+import com.qrmaster.api.dto.board.BoardDTO;
 import com.qrmaster.api.dto.board.response.BoardPageResponseDTO;
 import com.qrmaster.api.entity.mongo.Board;
 import com.qrmaster.api.service.BoardService;
@@ -47,7 +47,7 @@ public class BoardController {
 
     @PostMapping("/write")
     public JSONObject insertBoard(
-              @RequestBody BoardDto boardDto
+              @RequestBody BoardDTO boardDto
             , BindingResult bindingResult
     ){
         try {
@@ -69,7 +69,7 @@ public class BoardController {
 
     @PutMapping("/update")
     public JSONObject updateBoard(
-              @RequestBody BoardDto boardDto
+              @RequestBody BoardDTO boardDto
             , BindingResult bindingResult
     ){
 
@@ -90,7 +90,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/delete")
-    public JSONObject deleteBoard(@RequestBody BoardDto boardDto){
+    public JSONObject deleteBoard(@RequestBody BoardDTO boardDto){
         try {
             boardService.deleteBoard(boardDto.getId());
             return result.getData(ErrorCode.SUCCESS_CODE, "게시글이 삭제되었습니다.");
@@ -101,7 +101,7 @@ public class BoardController {
         }
     }
 
-    private Board makeBoardEntity(BoardDto boardDto){
+    private Board makeBoardEntity(BoardDTO boardDto){
         Board board = new Board();
         board.setTitle(boardDto.getTitle());
         board.setContent(boardDto.getContents());

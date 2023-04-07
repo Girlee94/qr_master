@@ -1,7 +1,9 @@
 package com.qrmaster.api.service;
 
+import com.qrmaster.api.dto.PageDTO;
 import com.qrmaster.api.dto.board.response.BoardPageResponseDTO;
 import com.qrmaster.api.dto.board.response.GetBoardListDTO;
+import com.qrmaster.api.dto.user.UserProfileDTO;
 import com.qrmaster.api.entity.mongo.Board;
 import com.qrmaster.api.enums.DeleteFlag;
 import com.qrmaster.api.repository.mongo.BoardRepository;
@@ -11,23 +13,44 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
 
     private final BoardRepository   boardRep;
+    private final UserService       userService;
 
     public BoardPageResponseDTO getBoardList(int page) {
 
         BoardPageResponseDTO    response    =   new BoardPageResponseDTO();
 
-        Page<Board> boardList   =   boardRep.getBoardList(DeleteFlag.VALID, PageRequest.of(page - 1, 10));
-        Page<GetBoardListDTO>   boardListDTOS   =   new GetBoardListDTO().toDtoList(boardList);
+        Page<Board> boardPage   =   boardRep.getBoardList(DeleteFlag.VALID, PageRequest.of(page - 1, 10));
+        List<Long>  userIdxs    =   boardPage.getContent().stream()
+                                                        .map(Board::getUser_idx)
+                                                        .distinct()
+                                                        .collect(Collectors.toList());
 
-        response.setPage(boardListDTOS);
+        List<UserProfileDTO>    userProfiles    =   userService.findUserProfiles(userIdxs);
+        response.setPage(new PageDTO<>(boardPage, joinProfileOnBoard(boardPage.getContent(), userProfiles)));
 
         return response;
+    }
+
+    private List<GetBoardListDTO> joinProfileOnBoard(List<Board> boardList, List<UserProfileDTO> userProfiles) {
+
+        return boardList.stream()
+                .map(board -> {
+                    UserProfileDTO  findProfileDTO  =   userProfiles.stream()
+                            .filter(u -> u.getUsr_idx() == board.getUser_idx())
+                            .findFirst()
+                            .orElse(null);
+
+                    return new GetBoardListDTO(board, findProfileDTO);
+                })
+                .collect(Collectors.toList());
     }
 
     /*

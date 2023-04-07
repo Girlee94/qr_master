@@ -1,7 +1,7 @@
 package com.qrmaster.api.controller;
 
-import com.qrmaster.api.dto.KeyDto;
-import com.qrmaster.api.dto.user.UserDto;
+import com.qrmaster.api.dto.KeyDTO;
+import com.qrmaster.api.dto.user.UserDTO;
 import com.qrmaster.api.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class UserController {
 	private final UserService	userService;
 
 	@PostMapping
-	public ResponseEntity<KeyDto<Long>> join(@RequestBody UserDto.Create user){
+	public ResponseEntity<KeyDTO<Long>> join(@RequestBody UserDTO.Create user){
 
 		return ResponseEntity.ok()
 				.body(userService.join(user));

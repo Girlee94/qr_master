@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class BoardDto {
+public class BoardDTO {
 
     private String id;
     private String title;

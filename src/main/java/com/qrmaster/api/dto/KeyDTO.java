@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class KeyDto<T> {
+public class KeyDTO<T> {
 
 	private T key;
 }
